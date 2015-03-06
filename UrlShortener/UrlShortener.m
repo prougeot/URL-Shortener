@@ -69,7 +69,7 @@ static ErrorBlock _errorBlock;
         NSMutableURLRequest *request;
         if (service == UrlShortenerServiceRedirect) {
             NSString *endPoint = [NSString stringWithFormat:REDIRECT_URL, encodedUrl, APP_NAME];
-            request = [NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]];
+            request = [[NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]] mutableCopy];
         }
         else if (service == UrlShortenerServiceGoogle) {
             request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://www.googleapis.com/urlshortener/v1/url"]
@@ -81,15 +81,15 @@ static ErrorBlock _errorBlock;
         }
         else if (service == UrlShortenerServiceIsgd) {
             NSString *endPoint = [NSString stringWithFormat:ISGD_URL, encodedUrl];
-            request = [NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]];
+            request = [[NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]] mutableCopy];
         }
         else if (service == UrlShortenerServiceJmp) {
             NSString *endPoint = [NSString stringWithFormat:JMP_URL, encodedUrl, BITLY_APIKEY, BITLY_LOGIN];
-            request = [NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]];
+            request = [[NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]] mutableCopy];
         }
         else {
             NSString *endPoint = [NSString stringWithFormat:BITLY_URL, encodedUrl, BITLY_APIKEY, BITLY_LOGIN];
-            request = [NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]];
+            request = [[NSURLRequest requestWithURL:[NSURL URLWithString:endPoint]] mutableCopy];
         }
         [NSURLConnection connectionWithRequest:request delegate:self];
     }
